@@ -61,7 +61,7 @@ void UAttentionChecker::Tick(float DeltaTime)
 UAttentionWatchDelegate* UAttentionChecker::WatchTarget(USceneComponent* Target, const FAttentionBPDelegate& CaptureDelegate, const FAttentionBPDelegate& LoseDelegate, float MaxDistance, bool ConsiderCollision)
 {
     auto* playerChar = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-    auto* playerCamera = playerChar->GetComponentByClass<UCameraComponent>();
+    auto* playerCamera = playerChar->FindComponentByClass<UCameraComponent>();
 
     return GetOrAddPair(
         FAttentionWatchPair(playerCamera, Target, MaxDistance, ConsiderCollision),
@@ -72,7 +72,7 @@ UAttentionWatchDelegate* UAttentionChecker::WatchTarget(USceneComponent* Target,
 UAttentionWatchDelegate* UAttentionChecker::DetectVisible(USceneComponent* Target, const FAttentionBPDelegate& Delegate, float MaxDistance, bool ConsiderCollision)
 {
     auto* playerChar = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-    auto* playerCamera = playerChar->GetComponentByClass<UCameraComponent>();
+    auto* playerCamera = playerChar->FindComponentByClass<UCameraComponent>();
 
     auto searchPair = FAttentionWatchPair(playerCamera, Target, MaxDistance, ConsiderCollision);
     searchPair.DetectOnce = true;
@@ -83,7 +83,7 @@ UAttentionWatchDelegate* UAttentionChecker::DetectVisible(USceneComponent* Targe
 UAttentionWatchDelegate* UAttentionChecker::DetectInvisible(USceneComponent* Target, const FAttentionBPDelegate& Delegate, float MaxDistance, bool ConsiderCollision)
 {
     auto* playerChar = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-    auto* playerCamera = playerChar->GetComponentByClass<UCameraComponent>();
+    auto* playerCamera = playerChar->FindComponentByClass<UCameraComponent>();
 
     auto searchPair = FAttentionWatchPair(playerCamera, Target, MaxDistance, ConsiderCollision);
     searchPair.DetectOnce = true;
